@@ -59,6 +59,7 @@
       <div>
         <p>Questo testo è un placeholder per gli esercizi</p>
       </div>
+      rgb(26, 156, 43)
     </div>
 
     <div>
@@ -71,9 +72,7 @@
     <footer>
       <h3>
         DOM Manipulation is super
-        <a href="https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents"
-          >AWESOME!</a
-        >
+        <a href="#">AWESOME!</a>
       </h3>
     </footer>
     <script>
@@ -190,14 +189,15 @@
 
       const revealFooterLink = function () {
         const show = document.querySelector("footer h3 a");
-        console.log(show);
-        show.alert(
+        console.log("check", show);
+        show.setAttribute(
+          "alert",
           "https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents"
         );
       };
 
       const linkx = document.querySelector("footer h3 a");
-      linkx.onclick = revealFooterLink;
+      linkx.onclick = revealFooterLink();
 
       /* ESERCIZIO 11
          Crea una funzione che crei una tabella nell'elemento con id "tableArea".
@@ -241,19 +241,52 @@
          Crea una funzione che aggiunga una riga alla tabella precedentemente creata e fornisca i dati necessari come parametri
       */
 
-      const addRow = function () {};
+      const addRow = function (param1, param2, param3, param4) {
+        const placer = document.querySelector("table tbody");
+        let newtr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        td1.innerText = param1;
+        let td2 = document.createElement("td");
+        td2.innerText = param2;
+        let td3 = document.createElement("td");
+        td3.innerText = param3;
+        let td4 = document.createElement("td");
+        td4.innerText = param4;
+        newtr.appendChild(td1);
+        newtr.appendChild(td2);
+        newtr.appendChild(td3);
+        newtr.appendChild(td4);
+        placer.appendChild(newtr);
+      };
+
+      addRow("a", "b", "c", "d");
 
       /* ESERCIZIO 14
         Crea una funzione che nasconda le immagini della tabella quando eseguita
       */
 
-      const hideAllImages = function () {};
+      const hideAllImages = function () {
+        let hide = document.querySelectorAll("td");
+        console.log(hide);
+        for (i = 0; i < hide.length; i = i + 4) {
+          hide[i].style.display = "none";
+        }
+        return hide;
+      };
+
+      hideAllImages();
 
       /* EXTRA ESERCIZIO 15
         Crea una funzione che cambi il colore del h2 con id "changeMyColor" con un colore random ad ogni click ricevuto
       */
 
-      const changeColorWithRandom = function () {};
+      const changeColorWithRandom = function () {
+        const randomizer = document.getElementById("changeMyColor");
+        randomizer.setAttribute("style", `color = #${Math.floor(Math.random() * 16777215).toString(16)}`);
+      };
+
+      const changer = document.getElementById("changeMyColor");
+      changer.onclick = changeColorWithRandom;
 
       /* EXTRA ESERCIZIO 16
         Crea una funzione che elimini le vocali da ogni elemento testuale della pagina (puoi aiutarti con i nuovi metodi degli array di ES6)
